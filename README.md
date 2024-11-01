@@ -57,29 +57,6 @@ ARG user=seu_usuario_linux
 ```
 
 
-**Atualize essas variáveis de ambiente no arquivo .env**
-```dosini
-APP_NAME="Esqueleto WebServer Apache PHP"
-APP_URL=http://localhost:8000
-
-# Configuração para MySQL
-DB_CONNECTION=mysql
-DB_HOST=db           
-DB_PORT=3306
-DB_DATABASE=esqueleto_webserver_apache_php 
-DB_USERNAME=noreply@phpfullstack.com.br         
-DB_PASSWORD=admin        
-
-CACHE_DRIVER=redis
-QUEUE_CONNECTION=redis
-SESSION_DRIVER=redis
-
-REDIS_HOST=redis
-REDIS_PASSWORD=null
-REDIS_PORT=6379
-```
-
-
 **Suba os containers do projeto**
 ```sh
 docker-compose up -d
