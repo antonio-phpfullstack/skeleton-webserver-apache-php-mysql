@@ -1,0 +1,56 @@
+version: "3.7"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    container_name: apache-php83
+    volumes:
+      - ./www:/var/www
+    ports:
+      - "8000:80"
+    networks:
+      - apache-php
+      
+  # db mysql
+  db:
+    image: mysql:8.1
+    platform: linux/x86_64
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: esqueleto_webserver_apache_php
+      MYSQL_ROOT_PASSWORD: admin_master
+      MYSQL_PASSWORD: admin
+      MYSQL_USER: noreply@phpfullstack.com.br
+    volumes:
+      - ./.docker/mysql/dbdata:/var/lib/mysql
+    ports:
+      - "3300:3306"
+    networks:
+      - apache-php
+
+  # PHPMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    platform: linux/x86_64
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: admin_master
+    networks:
+      - apache-php
+
+  # redis
+  redis:
+    image: redis:latest
+    networks:
+      - apache-php
+
+networks:
+  apache-php:
+    driver: bridge
