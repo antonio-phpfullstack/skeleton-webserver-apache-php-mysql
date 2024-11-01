@@ -37,7 +37,7 @@ ENV APACHE_DOCUMENT_ROOT=/var/www/public
 git clone https://github.com/antonio-phpfullstack/esqueleto-webserver-apache-php-mysql esqueleto-webserver-apache-php-mysql
 ```
 ```sh
-cd esqueleto-webserver-apache-php/
+cd esqueleto-webserver-apache-php-mysql/
 ```
 
 
