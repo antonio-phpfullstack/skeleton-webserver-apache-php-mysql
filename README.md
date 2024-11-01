@@ -74,6 +74,6 @@ docker compose up -d
 
 
 ## Acesse o PhpMyAdmin
-- :brain: *** Host ***[http://localhost:8080](http://localhost:8080)
-- :man: *** Usuário ***: noreply@phpfullstack.com.br
-- :key: *** Senha ***: admin
+- :brain: ***Host***[http://localhost:8080](http://localhost:8080)
+- :man: ***Usuário***: noreply@phpfullstack.com.br
+- :key: ***Senha***: admin
