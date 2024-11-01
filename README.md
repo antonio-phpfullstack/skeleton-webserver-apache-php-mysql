@@ -34,7 +34,7 @@ ENV APACHE_DOCUMENT_ROOT=/var/www/public
 ## Passo a passo para rodar o projeto
 **Clone o projeto**
 ```sh
-git clone https://github.com/antonio-phpfullstack/esqueleto-webserver-apache-php esqueleto-webserver-apache-php
+git clone https://github.com/antonio-phpfullstack/esqueleto-webserver-apache-php-mysql esqueleto-webserver-apache-php-mysql
 ```
 ```sh
 cd esqueleto-webserver-apache-php/
