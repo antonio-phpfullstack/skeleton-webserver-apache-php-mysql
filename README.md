@@ -116,6 +116,5 @@ ENV APACHE_DOCUMENT_ROOT=/var/www/public
 ```
 - Configure o nome de usuário e o grupo do apache para o mesmo da sua máquina local. Tanto no ambiente front-end, quanto no ambiente back-end
 - Com essas configurações você não terá problemas de permissão dos arquivos e diretórios
-- Essas configurações são feitas no arquivo Dockerfile, nos ambientes back-end e front-end, e no arquivo envvars, no ambiente back-end
-- Foi explicado com detalhes como isso deve ser feito
-- Antes de realizar qualquer modificação referente a configuração leia atentamente os comentários da configuração nas linhas que antecedem essa configuração
+- Essas configurações são feitas no arquivo Dockerfile, nos ambientes back-end e front-end, e no arquivo envvars, no ambiente back-end. Previamente já foi descrito como realizá-lo em detalhes
+- Antes de realizar qualquer modificação referente a configuração leia atentamente os comentários nas linhas que antecedem essas configurações
