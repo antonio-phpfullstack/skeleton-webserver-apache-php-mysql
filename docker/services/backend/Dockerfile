@@ -23,6 +23,11 @@ RUN apt-get update && apt-get install -y \
     default-mysql-client 
 
 
+# Instalação do Node.js e npm
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs
+
+
 # Limpa o cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -38,10 +43,10 @@ RUN docker-php-ext-install pdo_mysql \
     zip \
     soap \
     xml  
-
-
+    
+    
 # Utilize a configuração de produção padrão. Para qualquer necessidade altere esse arquivo
-COPY ./docker/php/php.ini /usr/local/etc/php/php.ini
+COPY ./settings/php/php.ini /usr/local/etc/php/php.ini
 
 
 # Copia o executável do Composer diretamente da imagem oficial para o contêiner.
@@ -72,7 +77,7 @@ RUN pecl install xdebug \
 
 #Deleta a configuração padrão do apache para substituir as permissões do usuário e grupo do apache
 RUN  rm /etc/apache2/envvars 
-COPY ./docker/apache/envvars /etc/apache2/envvars
+COPY ./settings/apache/envvars /etc/apache2/envvars
 
 
 # As linhas abaixo configuram o diretório raiz do Apache dentro do contêiner para que o servidor web aponte para o diretório /var/www/public

@@ -5,6 +5,7 @@
 - Apache, versão mais estável
 - MySQL 8.1, versão mais estável
 - PHPMyAdmin, versão mais estável
+- Node.js, versão 20 mais estável
 - Redis, versão mais estável
 
 **Links Úteis:**
@@ -41,17 +42,17 @@ cd esqueleto-webserver-apache-php-mysql/
 ```
 
 
-**No arquivo Dockerfile, altere o nome do usuário para o usuário da sua máquina, ex: ARG user=antonio**
+**No arquivo docker/services/backend/Dockerfile, altere o nome do usuário para o usuário da sua máquina, ex: ARG user=antonio**
 ```sh
 ARG user=seu_usuario_linux
 ```
 
-**No arquivo docker/apache/envvars, na linha 17, altere o usuário do Apache para o usuário da sua máquina, ex: : ${APACHE_RUN_USER:=antonio}**
+**No arquivo docker/services/backend/settings/apache/envvars, na linha 17, altere o usuário do Apache para o usuário da sua máquina, ex: : ${APACHE_RUN_USER:=antonio}**
 ```sh
 : ${APACHE_RUN_USER:=www-data}
 ```
 
-**No arquivo docker/apache/envvars, na linha 20, altere o grupo do Apache para o grupo do seu usuário da sua máquina, ex: : ${APACHE_RUN_GROUP:=antonio}**
+**No arquivo docker/services/backend/settings/apache/envvars, na linha 20, altere o grupo do Apache para o grupo do seu usuário da sua máquina, ex: : ${APACHE_RUN_GROUP:=antonio}**
 ```sh
 : ${APACHE_RUN_GROUP:=www-data}
 ```
@@ -69,11 +70,14 @@ docker compose up -d
 ```
 
 
-## Acesse o projeto
+## Acesse o projeto php
 - :rocket: [http://localhost:8000](http://localhost:8000)
+
+## Acesse o projeto front-end
+- :rocket: [http://localhost:8001](http://localhost:8001)
 
 
 ## Acesse o PhpMyAdmin
-- :brain: ***Host***: [http://localhost:8080](http://localhost:8080)
+- :brain: ***Host***: [http://localhost:8002](http://localhost:8002)
 - :man: ***Usuário***: noreply@phpfullstack.com.br
 - :key: ***Senha***: admin

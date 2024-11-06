@@ -1,12 +1,13 @@
 version: "3.7"
 
 services:
-  app:
+  # back-end php
+  backend:
     build:
-      context: .
+      context: docker/services/backend
       dockerfile: Dockerfile
     restart: unless-stopped
-    container_name: apache-php83
+    container_name: backend
     volumes:
       - ./www:/var/www
     ports:
@@ -14,6 +15,22 @@ services:
     networks:
       - apache-php
       
+  # front-end
+  frontend:
+    build:
+      context: docker/services/frontend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    container_name: frontend
+    volumes:
+      - ./frontend:/usr/local/apache2/htdocs
+    expose:
+      - "8080"
+    ports:
+      - "8001:80"
+    networks:
+      - apache-php
+    
   # db mysql
   db:
     image: mysql:8.1
@@ -37,7 +54,7 @@ services:
     platform: linux/x86_64
     restart: unless-stopped
     ports:
-      - "8080:80"
+      - "8002:80"
     environment:
       PMA_HOST: db
       PMA_PORT: 3306
