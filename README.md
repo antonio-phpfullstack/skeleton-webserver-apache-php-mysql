@@ -118,3 +118,24 @@ ENV APACHE_DOCUMENT_ROOT=/var/www/public
 - Com essas configurações você não terá problemas de permissão dos arquivos e diretórios
 - Essas configurações são feitas no arquivo Dockerfile, nos ambientes back-end e front-end, e no arquivo envvars, no ambiente back-end. Previamente já foi descrito como realizá-lo em detalhes
 - Antes de realizar qualquer modificação referente a configuração leia atentamente os comentários nas linhas que antecedem essas configurações
+- Para configurar corretamente o XDebug veja o arquivo docker/services/backend/Dockerfile
+```sh
+ENV XDEBUG_CONFIG="client_host=172.17.0.1 client_port=9003"
+```
+- Foi configurado nesse arquivo Dockerfile para o ambiente Linux. Caso esteja no ambiente Windows ou Mac descomente o código abaixo e comente o código acima
+```sh
+#ENV XDEBUG_CONFIG="client_host=host.docker.internal client_port=9003"
+```
+- Perceba que estamos trabalhando com o XDebug na porta 9003
+- Da mesma forma, no arquivo docker/services/backend/settings/php/php.ini, veja a configuração para o XDebug
+```sh
+xdebug.client_host=172.17.0.1
+```
+- Foi configurado no arquivo php.ini para o ambiente Linux. Caso esteja no ambiente Windows ou Mac descomente o código abaixo e comente o código acima
+```sh
+;xdebug.client_host=host.docker.internal
+```
+- Perceba que estamos trabalhando com o XDebug na porta 9003
+```sh
+xdebug.client_port=9003
+```

@@ -73,7 +73,13 @@ RUN pecl install -o -f redis \
 # Instalação do xdebug
 RUN pecl install xdebug \
 	&& docker-php-ext-enable xdebug
-
+ENV XDEBUG_MODE=debug
+# Atualize para a porta correta do Xdebug caso seja Linux
+ENV XDEBUG_CONFIG="client_host=172.17.0.1 client_port=9003"
+# Substitua a linha de cima por essa linha abaixo se for Mac ou Windows
+#ENV XDEBUG_CONFIG="client_host=host.docker.internal client_port=9003"
+# Cria o diretório /var/log com permissões apropriadas para o usuário
+RUN mkdir -p /var/log && chown -R $user:$user /var/log
 
 #Deleta a configuração padrão do apache para substituir as permissões do usuário e grupo do apache
 RUN  rm /etc/apache2/envvars 
