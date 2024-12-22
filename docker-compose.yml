@@ -22,6 +22,11 @@ services:
     build:
       context: docker/services/frontend
       dockerfile: Dockerfile
+      args:
+        USUARIO: ${USUARIO}
+        GRUPO: ${GRUPO}
+        UID: ${UID}
+        GID: ${GID}
     restart: unless-stopped
     container_name: frontend
     volumes:

@@ -1,11 +1,12 @@
 FROM httpd:2.4
 
 
-# Caso o nome do grupo do usuário da sua máquina local seja diferente do nome do usuário acrescente mais uma variável de ambiente
-# e localize onde essa variável esta sendo usada, abaixo nesse mesmo arquivo, e faça as devidas modificações
-# Altere a variável de ambiente abaixo para o nome de usuário do seu Linux, ex: user=antonio
-ARG user=seu_usuario_linux
-ARG uid=1000
+# Variáveis de ambiente para definição do usuário e grupo do linux.
+# Os valores vêm do arquivo .env na raiz do projeto
+ARG USUARIO
+ARG GRUPO
+ARG UID
+ARG GID
 
 
 # Instalação das dependências do sistema
@@ -31,14 +32,15 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 
-# Cria um novo usuário do sistema, especificando grupos e identificador (UID), e define seu diretório inicial.
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
+# Cria um novo usuário do sistema e define o diretório inicial.
+RUN groupadd -g $GID $GRUPO && \
+    useradd -m -u $UID -g $GRUPO -G www-data,root -d /home/$USUARIO $USUARIO
 
 
-# Define o proprietário do diretório /var/www
-RUN chown $user:$user /usr/local/apache2/htdocs
+# Define o proprietário e grupo do diretório /usr/local/apache2/htdocs
+# Esse é o diretório do webserver do apache
+RUN chown $USUARIO:$GRUPO /usr/local/apache2/htdocs
 
 
 # Define o diretório de trabalho no contêiner onde todos os comandos subsequentes serão executados
 WORKDIR /usr/local/apache2/htdocs
-
