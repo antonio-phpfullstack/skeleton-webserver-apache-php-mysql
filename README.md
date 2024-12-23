@@ -13,7 +13,7 @@
 - :tada: [Site: https://phpfullstack.com.br](https://phpfullstack.com.br/)
 
 
-## Passo a passo para rodar o projeto
+## Passo a passo para executar o projeto
 **Clone o projeto**
 ```sh
 git clone https://github.com/antonio-phpfullstack/esqueleto-webserver-apache-php-mysql esqueleto-webserver-apache-php-mysql
@@ -23,29 +23,15 @@ cd esqueleto-webserver-apache-php-mysql/
 ```
 
 
-**No arquivo docker/services/frontend/Dockerfile, altere o nome do usuário para o usuário da sua máquina, ex: ARG user=antonio**
+**No arquivo .env, do diretório raiz, altere o nome do usuário e grupo para os valores correspondente do host que será 
+utilizado, ex: USUARIO=antonio...**
+
 ```sh
-ARG user=seu_usuario_linux
+USUARIO=seu_usuario_linux
+GRUPO=seu_grupo_linux
+UID=1000
+GID=1000
 ```
-
-
-**No arquivo docker/services/backend/Dockerfile, altere o nome do usuário para o usuário da sua máquina, ex: ARG user=antonio**
-```sh
-ARG user=seu_usuario_linux
-```
-
-
-**No arquivo docker/services/backend/settings/apache/envvars, na linha 17, altere o usuário do Apache para o usuário da sua máquina, ex: : ${APACHE_RUN_USER:=antonio}**
-```sh
-: ${APACHE_RUN_USER:=www-data}
-```
-
-
-**No arquivo docker/services/backend/settings/apache/envvars, na linha 20, altere o grupo do Apache para o grupo do seu usuário da sua máquina, ex: : ${APACHE_RUN_GROUP:=antonio}**
-```sh
-: ${APACHE_RUN_GROUP:=www-data}
-```
-
 
 **Suba os contêiners do projeto**
 ```sh
@@ -92,10 +78,10 @@ OU
 ```sh
 docker compose exec front bash
 ```
-- Caso você tenha seguido corretamente essa documentação, você acessará o ambiente back-end com o mesmo nome de usuário da sua máquina
-- Caso você tenha seguido corretamente essa documentação, você terá criado um usuário para o ambiente front-end com o mesmo nome de usuário da sua máquina
+- Caso você tenha seguido corretamente essa documentação, você terá um usuário e seu grupo para o ambiente back-end com o mesmo nome de usuário e grupo da sua máquina
+- Caso você tenha seguido corretamente essa documentação, você terá um usuário e seu grupo para o ambiente front-end com o mesmo nome de usuário e grupo da sua máquina
 - Mesmo que você tenha seguido corretamente essa documentação, ao acessar o ambiente front-end você estará com o usuário root
-- Depois de acessar o ambiente front-end, com o comando acima citado, troque o usuário do contêiner para o usuário da sua máquina antes de executar qualquer comando
+- Caso queira executar algum comando que envolva alteração de arquivos ou diretórios no contêiner do frontend, depois de acessar o ambiente front-end, troque o usuário root para o usuário da sua máquina antes de executar qualquer comando
 ```sh
 su - seu_usuario_linux
 ```
@@ -109,33 +95,17 @@ exit
 - Dentro do contêiner back-end, os comandos serão executados por padrão, no diretório /var/www/
 - Dentro do contêiner back-end, o diretório padrão do apache esta configurado para o diretório /var/www/public/
 - Dentro do contêiner back-end, essa diferenciação do diretório de execução dos comandos para o diretório padrão do apache foi realizada devido à diferentes plataformas requisitarem diferentes diretórios padrão web
-- Plataformas usam caminhos de diretórios diferentes de execução para o WebServers(ex.: Laravel que usa o public)
-- Dentro do contêiner back-end a configuração do diretório padrão do Apache pode ser alterada no arquivo Dockerfile. Esse arquivo esta localizado no diretório: /docker/services/backend/Dockerfile localizando a linha que contém o comando abaixo
+- Plataformas usam caminhos de diretórios diferentes de execução para do WebServer(ex.: Laravel que usa o public)
+- Dentro do contêiner back-end a configuração do diretório padrão do Apache pode ser alterada no arquivo Dockerfile. Esse arquivo está localizado no diretório: /docker/services/backend/Dockerfile. Encontre a linha que contém o comando abaixo
 ```sh
 ENV APACHE_DOCUMENT_ROOT=/var/www/public
 ```
-- Configure o nome de usuário e o grupo do apache para o mesmo da sua máquina local. Tanto no ambiente front-end, quanto no ambiente back-end
-- Com essas configurações você não terá problemas de permissão dos arquivos e diretórios
-- Essas configurações são feitas no arquivo Dockerfile, nos ambientes back-end e front-end, e no arquivo envvars, no ambiente back-end. Previamente já foi descrito como realizá-lo em detalhes
-- Antes de realizar qualquer modificação referente a configuração leia atentamente os comentários nas linhas que antecedem essas configurações
 - Para configurar corretamente o XDebug veja o arquivo docker/services/backend/Dockerfile
 ```sh
 ENV XDEBUG_CONFIG="client_host=172.17.0.1 client_port=9003"
 ```
-- Foi configurado nesse arquivo Dockerfile para o ambiente Linux. Caso esteja no ambiente Windows ou Mac descomente o código abaixo e comente o código acima
+- Foi configurado o XDebug, no arquivo Dockerfile, para o ambiente Linux. Caso esteja no ambiente Windows ou Mac descomente o código abaixo e comente o código acima
 ```sh
 #ENV XDEBUG_CONFIG="client_host=host.docker.internal client_port=9003"
 ```
-- Perceba que estamos trabalhando com o XDebug na porta 9003
-- Da mesma forma, no arquivo docker/services/backend/settings/php/php.ini, veja a configuração para o XDebug
-```sh
-xdebug.client_host=172.17.0.1
-```
-- Foi configurado no arquivo php.ini para o ambiente Linux. Caso esteja no ambiente Windows ou Mac descomente o código abaixo e comente o código acima
-```sh
-;xdebug.client_host=host.docker.internal
-```
-- Perceba que estamos trabalhando com o XDebug na porta 9003
-```sh
-xdebug.client_port=9003
-```
+- Perceba que trabalhamos com o XDebug na porta 9003
