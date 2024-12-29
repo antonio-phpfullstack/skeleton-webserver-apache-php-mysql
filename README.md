@@ -100,16 +100,6 @@ exit
 ```sh
 ENV APACHE_DOCUMENT_ROOT=/var/www/public
 ```
-- Para configurar corretamente o XDebug veja o arquivo docker/services/backend/Dockerfile
-```sh
-ENV XDEBUG_CONFIG="client_host=172.17.0.1 client_port=9003"
-```
-- Foi configurado o XDebug, no arquivo Dockerfile, para o ambiente Linux. Caso esteja no ambiente Windows ou Mac descomente o código abaixo e comente o código acima
-```sh
-#ENV XDEBUG_CONFIG="client_host=host.docker.internal client_port=9003"
-```
-- Perceba que trabalhamos com o XDebug na porta 9003
-
 ## Recomendações sobre Xdebug
 A configuração recomendada para o Xdebug encontra-se no arquivo /docker/service/backend/settings/php/custom.ini
 ```sh

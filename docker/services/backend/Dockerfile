@@ -74,11 +74,6 @@ RUN pecl install -o -f redis \
 RUN pear config-set php_ini /usr/local/etc/php/php.ini \
     && pecl install xdebug-3.4.0 \
 	&& docker-php-ext-enable xdebug
-ENV XDEBUG_MODE=debug
-# Atualize para a porta correta do Xdebug caso seja Linux
-ENV XDEBUG_CONFIG="client_host=172.17.0.1 client_port=9003"
-# Substitua a linha de cima por essa linha abaixo se for Mac ou Windows
-#ENV XDEBUG_CONFIG="client_host=host.docker.internal client_port=9003"
 # Cria o diretório /var/log com permissões apropriadas para o usuário
 RUN mkdir -p /var/log && chown -R $USUARIO:$GRUPO /var/log
 
