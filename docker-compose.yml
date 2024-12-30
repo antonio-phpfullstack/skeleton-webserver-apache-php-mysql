@@ -72,7 +72,7 @@ services:
 
   # redis
   redis:
-    image: redis:latest
+    image: redis:8.0-M02
     networks:
       - apache-php
 

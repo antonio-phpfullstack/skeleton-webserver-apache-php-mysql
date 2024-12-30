@@ -6,7 +6,7 @@
 - MySQL 8.1, versão mais estável
 - PHPMyAdmin, versão mais estável
 - Node.js, versão 20 mais estável
-- Redis, versão mais estável
+- Redis, versão 8.0-M02
 
 **Links Úteis:**
 
