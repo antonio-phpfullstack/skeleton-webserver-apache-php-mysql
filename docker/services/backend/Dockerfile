@@ -29,7 +29,9 @@ RUN apt-get update && apt-get install -y \
 
 
 # Instalação das extensões PHP
-RUN docker-php-ext-install pdo_mysql \
+RUN docker-php-ext-install mysqli  \
+    pdo \
+    pdo_mysql \
     mbstring \
     exif \
     pcntl \
