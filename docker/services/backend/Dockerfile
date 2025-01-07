@@ -67,7 +67,7 @@ RUN mkdir -p /home/$USUARIO/.composer && \
 
 
 # Instalação do redis
-RUN pecl install -o -f redis \
+RUN pecl install -o -f redis-6.1.0 \
     &&  rm -rf /tmp/pear \
     &&  docker-php-ext-enable redis
 
