@@ -8,7 +8,7 @@
 - Node.js, versão 20 mais estável
 - Redis, versão 8.0-M02
 
-## Diversos Branches no Repositório
+## Diversos branches no repositório
 - Cada branch neste repositório corresponde a uma versão específica do PHP, configurada com as mesmas extensões e dependências
 - A branch principal contém a última versão estável do PHP, atualmente PHP 8.4
 
