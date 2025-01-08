@@ -1,7 +1,7 @@
 # Esqueleto Gratuito Apache/PHP/MySQL/PHPMyAdmin
 
 ## Ao final do projeto você terá um ambiente:
-- PHP 8.3, versão mais estável
+- PHP 8.4, versão mais estável
 - Apache, versão mais estável
 - MySQL 8.1, versão mais estável
 - PHPMyAdmin, versão mais estável
